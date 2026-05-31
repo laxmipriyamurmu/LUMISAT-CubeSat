@@ -1,214 +1,155 @@
-# LUMISAT – CubeSat for Artificial Light Pollution Monitoring
+# Aerodynamics Performance Analysis of Hypersonic Vehicles
 
-## Overview
-
-LUMISAT is a 1.5U CubeSat developed to monitor artificial light pollution through onboard environmental sensing, telemetry transmission, and real-time data visualization.
-
-The project combines aerospace systems engineering, embedded electronics, telemetry, structural design, and environmental monitoring to study the impact of artificial lighting on ecosystems and urban environments.
+Computational Fluid Dynamics (CFD) analysis of three hypersonic vehicle configurations operating at Mach 5 and Mach 7. The project investigates the influence of nose geometry on aerodynamic performance, shock-wave behavior, pressure distribution, temperature rise, and drag characteristics using ANSYS Fluent.
 
 ---
 
-## Project Report
+## Project Overview
 
-📄 Full Report:
+Hypersonic vehicles experience complex aerodynamic phenomena due to strong shock waves, extreme temperatures, and compressibility effects.
 
-[View Project Report](report/LUMISAT.pdf)
+This study compares three vehicle configurations:
 
----
+- Model 1 – NASA X-43A inspired blunt nose
+- Model 2 – Moderate conical nose
+- Model 3 – Elongated sharp conical nose
 
-## Mission Objectives
-
-* Detect and monitor artificial light sources
-* Measure light intensity and color characteristics
-* Analyze environmental parameters in real time
-* Demonstrate CubeSat subsystem integration
-* Develop telemetry and ground station capabilities
-* Validate low-cost environmental monitoring concepts
+The objective was to determine how nose geometry affects drag coefficient, lift coefficient, pressure distribution, temperature distribution, and overall aerodynamic efficiency.
 
 ---
 
-## CubeSat Specifications
+## Vehicle Configurations
 
-| Parameter          | Value                    |
-| ------------------ | ------------------------ |
-| Platform           | 1.5U CubeSat             |
-| Dimensions         | 10 cm × 10 cm × 15 cm    |
-| Structure Material | PLA                      |
-| Power System       | 7.7V 2000 mAh Li-Po      |
-| Telemetry          | Wi-Fi + Firebase         |
-| Recovery System    | Servo-Deployed Parachute |
-| Controller         | ESP32-S3 / Bharat Pi     |
+### Model 1 – Flat Blunt Nose
 
----
+![Model 1](images/model-1.png)
 
-## Technologies Used
+### Model 2 – Moderate Conical Nose
 
-* Fusion 360
-* SolidWorks
-* ANSYS Workbench
-* ESP32-S3
-* Firebase
-* PCB Design
-* Sensor Integration
-* Embedded Systems
-* Aerospace Systems Engineering
+![Model 2](images/model-2.png)
+
+### Model 3 – Elongated Sharp Conical Nose
+
+![Model 3](images/model-3.png)
 
 ---
 
-## Structural Design
+## CFD Methodology
 
-### CubeSat Structural Model
+![Methodology](images/methodology.png)
 
-![Structural Model](images/structural-model.png)
+The analysis workflow consisted of:
 
-The CubeSat structure was designed as a lightweight 1.5U platform optimized for payload integration, manufacturability, and recovery operations.
-
----
-
-### Parachute Bay Integration
-
-![Parachute Bay](images/parachute-bay.png)
-
-A dedicated deployment section was incorporated to enable controlled recovery through a parachute mechanism.
+1. Geometry Creation
+2. Computational Domain Creation
+3. Mesh Generation
+4. Solver Configuration
+5. Convergence Analysis
+6. Post Processing
+7. Comparative Performance Evaluation
 
 ---
 
-## Electronics Development
+## Mesh Generation
 
-### Breadboard Prototyping
+### Computational Mesh
 
-![Breadboard Prototype](images/breadboard-prototype.png)
+![Mesh Structure](images/mesh-structure.png)
 
-All sensors and communication modules were validated through hardware prototyping before PCB fabrication.
+### Mesh Quality Assessment
 
----
+![Mesh Quality](images/mesh-quality.png)
 
-### PCB Development
+Key characteristics:
 
-![PCB Fabrication](images/pcb-fabrication.png)
-
-A custom double-layer PCB was developed to integrate sensing, telemetry, and power management subsystems.
-
----
-
-## Sensor Payload
-
-### TCS34725 RGB Sensor
-
-![TCS34725](images/tcs34725-sensor.png)
-
-Used for measuring RGB light intensity and color characteristics.
+- Unstructured tetrahedral mesh
+- ~4.14 Million cells
+- ~8.41 Million faces
+- ~756,000 nodes
 
 ---
 
-### MPU6050 IMU
+## Simulation Setup
 
-![MPU6050](images/mpu6050-sensor.png)
+### Software
 
-Used for motion sensing, orientation monitoring, and deployment analysis.
+- ANSYS Fluent 2024 R1
 
----
+### Turbulence Model
 
-### BMP581 Sensor
+- SST k-ω
 
-![BMP581](images/bmp581-sensor.png)
+### Solver
 
-Used for pressure, temperature, and altitude estimation.
+- Density-Based Implicit Solver
 
----
+### Working Fluid
 
-## Recovery System Testing
+- Air (Ideal Gas)
 
-### Parachute Deployment Validation
+### Mach Numbers Investigated
 
-![Parachute Test](images/parachute-deployment-test.png)
-
-Recovery testing was performed to validate descent stability and safe payload recovery.
-
----
-
-## Final Assembly
-
-### Integrated CubeSat Prototype
-
-![LUMISAT Assembly](images/lumisat-final-assembly.png)
-
-Final integrated CubeSat incorporating structure, electronics, sensors, and recovery mechanisms.
+- Mach 5
+- Mach 7
 
 ---
 
-## Team
+## Sample Results
 
-### LUMISAT Development Team
+### Convergence History
 
-![Team](images/team-photo.png)
+![Residual Plot](results/residual-model1-mach5.png)
 
-The project was developed through a multidisciplinary team effort involving aerospace design, electronics integration, telemetry development, and environmental sensing.
+### Drag Coefficient Evolution
 
----
-
-## Telemetry System
-
-The CubeSat telemetry architecture was developed using:
-
-* ESP32-S3
-* Firebase Realtime Database
-* Environmental Sensors
-* Real-Time Data Streaming
-
-Measured parameters included:
-
-* Light Intensity
-* RGB Values
-* Pressure
-* Temperature
-* Altitude
-* Accelerometer Data
-* Gyroscope Data
-
-Firmware available in:
-
-```text
-transmission-code.ino
-```
+![Drag Coefficient](results/cd-model1-mach5.png)
 
 ---
 
-## Key Outcomes
+## Key Findings
 
-* Successful CubeSat structural development
-* Sensor payload integration
-* Real-time telemetry transmission
-* Environmental data acquisition
-* PCB design and fabrication
-* Recovery system validation
-* Ground station visualization capability
+- Blunt nose configuration generated the strongest detached bow shock.
+- Sharp conical nose reduced aerodynamic drag significantly.
+- Shock stand-off distance decreased with increasing nose sharpness.
+- Model 3 demonstrated the best aerodynamic efficiency at hypersonic speeds.
+- Surface temperature concentration increased near sharper nose tips.
+- Aerodynamic performance strongly depended on nose geometry.
 
 ---
 
 ## Skills Demonstrated
 
-* Space Systems Engineering
-* CubeSat Development
-* Embedded Systems
-* Telemetry Systems
-* PCB Design
-* Sensor Integration
-* Finite Element Analysis
-* CAD Modeling
-* Aerospace Project Development
+- Computational Fluid Dynamics (CFD)
+- ANSYS Fluent
+- Aerospace Aerodynamics
+- Hypersonic Flow Analysis
+- Mesh Generation
+- Numerical Simulation
+- Post Processing
+- Engineering Research
 
 ---
 
-## Author
+## Project Report
 
-**Laxmipriya Murmu**
+Complete technical report:
 
-B.Tech Aerospace Engineering
+[Hypersonic CFD Report](report/hypersonic-cfd-report.pdf)
+
+---
+
+## Authors
+
+Laxmipriya Murmu  
+B.Tech Aerospace Engineering  
 Lovely Professional University
 
-🚀 Rocket Propulsion | 🛰️ Space Systems | ✈️ CFD & Aerodynamics
+Project Team:
+- Laxmipriya Murmu
+- Gowtham Kumar Talla
+- Shaikh Mohd Zafar Iqbal Jawaid Ashraf
+- Mounish Damera
+- Jitesh Jambulkar
 
-[LinkedIn](https://www.linkedin.com/in/laxmipriyamurmu/)
-
-[GitHub](https://github.com/laxmipriyamurmu)
+Faculty Guide:
+- Dr. Rahul Kumar
